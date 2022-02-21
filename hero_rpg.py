@@ -46,7 +46,6 @@ class Character:
         #         self.power = self.power
         #         enemy.health -= self.power
         #         print(f"The crafty {self.character_name} gained 2 health!")
-        #         self.power = self.power / 6
         #     else:
         #         enemy.health -= self.power
 
@@ -151,13 +150,13 @@ class Golem(Character): #custom character, 25HP
 #------------------------------------
 
 # character stats(health/HP, power/damage)
-hero = Hero(15, 5)      
-goblin = Goblin(6, 2)
-zombie = Zombie(10, 1)
+hero = Hero(150, 5)      
+goblin = Goblin(60, 2)
+zombie = Zombie(100, 1)
 medic = Medic(15, 2)
 shadow = Shadow(1, 2)
-behemoth = Behemoth(25, 5)
-golem = Golem(25, 5)
+behemoth = Behemoth(250, 5)
+golem = Golem(250, 5)
 
 #------------------------------------
 # #Item Shop addition (not sure how to add it yet)
@@ -235,4 +234,4 @@ def main(enemy):
                 print("You are dead.")
         
 
-main(behemoth) # <<< choose a character
+main(zombie) # <<< choose a character
