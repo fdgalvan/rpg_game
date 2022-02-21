@@ -27,27 +27,60 @@ class Character:
             return False
         
     def attack(self, enemy): 
-        if(self.character_name == "goblin" or self.character_name == "zombie" or self.character_name == "medic" or self.character_name == "shadow" or self.character_name == "behemoth" or self.character_name == "golem"):
+        if(self.character_name == "goblin" or self.character_name == "zombie" or self.character_name == "medic" or self.character_name == "shadow" or self.character_name == "golem"):
             enemy.health -= self.power
-#            print(self.getPower(enemy))
-    def getPower(self, enemy):
-        if(enemy.character_name == "goblin" or enemy.character_name != "zombie" or enemy.character_name == "medic" or enemy.character_name == "shadow" or enemy.character_name == "behemoth" or enemy.character_name == "golem"):
+#            print(self.doublePower(enemy))
+        if(self.character_name == "behemoth"):
+            r = random.randint(1,10)
+            if r == 5:
+                self.power = self.power * 6
+                enemy.health -= self.power
+                print(f"{self.character_name} does a monstrous 30 damage!")
+                self.power = self.power / 6
+            else:
+                enemy.health -= self.power
+        # if(self.character_name == "medic"):
+        #     r = random.randint(1,5)
+        #     if r == 3:
+        #         self.health + 2
+        #         self.power = self.power
+        #         enemy.health -= self.power
+        #         print(f"The crafty {self.character_name} gained 2 health!")
+        #         self.power = self.power / 6
+        #     else:
+        #         enemy.health -= self.power
+
+
+    def doublePower(self, enemy):
+        if(enemy.character_name == "goblin" or enemy.character_name != "zombie" or enemy.character_name == "medic" or enemy.character_name == "behemoth" or enemy.character_name == "golem"):
             r = random.randint(1,5)
             if r == 1:
                 self.power = self.power * 2
                 enemy.health -= self.power
-                print(f"{self.character_name} does double damage!")
+                print(f"{self.character_name} does d-d-d-double damage!")
                 self.power = self.power / 2
             else:
                 enemy.health -= self.power
         # if enemy.character_name != "zombie":
         #     enemy.health -= self.power
         
+        if(enemy.character_name == "shadow"):
+            r = random.randint(1,10)
+            if r == 5:
+                self.power = self.power
+                enemy.health -= self.power
+                print(f"{self.character_name} does some damage!")
+            else:
+                pass
+                
+        
         if(self.character_name == "hero"):
-            print(f"You do {self.power} damage to the {enemy.character_name}.")
+            print(f"You do {self.power} base damage to the {enemy.character_name}.")
         
         # elif(self.character_name == "goblin" or self.character_name == "zombie" or self.character_name == "medic" or self.character_name == "shadow" or self.character_name == "behemoth" or self.character_name == "golem"):
         #     print(f"The {self.character_name} does {self.power} damage to you.")
+    
+
 
     
     def print_status(self):
@@ -68,21 +101,21 @@ class Character:
 
 #------------------------------------
 
-class Hero(Character):
+class Hero(Character): # DONE 20% chance to do double damage
     def __init__(self, health, power):
         self.character_name = "hero"
         super(Hero, self).__init__(health, power)
 
 #------------------------------------
 
-class Goblin(Character):
+class Goblin(Character): # DONE nothing special
     def __init__(self, health, power):
         self.character_name = "goblin"
         super(Goblin, self).__init__(health, power)
 
 #------------------------------------
 
-class Zombie(Character):
+class Zombie(Character):# DONE doesn't die
     def __init__(self, health, power):
         self.character_name = "zombie"
         super(Zombie, self).__init__(health, power)
@@ -103,7 +136,7 @@ class Shadow(Character): #has 1HP but can only be hit with a 10% chance
 
 #------------------------------------
 
-class Behemoth(Character):  #custom character, 15HP and 10% chance to do 30 damage(KO)
+class Behemoth(Character):  #DONE - custom character, 25HP, 5 normal damage, 10% chance to do x6 (30) damage.
     def __init__(self, health, power):
         self.character_name = "behemoth"
         super(Behemoth, self).__init__(health, power)
@@ -117,14 +150,14 @@ class Golem(Character): #custom character, 25HP
 
 #------------------------------------
 
-#character stats(health, power)
-hero = Hero(100, 5)      
-goblin = Goblin(100, 2)
-zombie = Zombie(100, 1)
-medic = Medic(100, 2)
+# character stats(health/HP, power/damage)
+hero = Hero(15, 5)      
+goblin = Goblin(6, 2)
+zombie = Zombie(10, 1)
+medic = Medic(15, 2)
 shadow = Shadow(1, 2)
-behemoth = Behemoth(15, 30)
-golem = Golem(25, 2)
+behemoth = Behemoth(25, 5)
+golem = Golem(25, 5)
 
 #------------------------------------
 # #Item Shop addition (not sure how to add it yet)
@@ -181,7 +214,7 @@ def main(enemy):
         raw_input = input()
         if raw_input == "1":
             
-            hero.getPower(enemy) 
+            hero.doublePower(enemy) 
 
             if not enemy.alive():
                 print(f"The {enemy.character_name} is dead.")
@@ -202,4 +235,4 @@ def main(enemy):
                 print("You are dead.")
         
 
-main(zombie) # <<< choose a character
+main(behemoth) # <<< choose a character
